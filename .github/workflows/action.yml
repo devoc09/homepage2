@@ -9,9 +9,8 @@ on:
   pull_request:
     branches:
       - main
-defaults:
+jobs:
   build-docker-image:
-    name: Build Docker image
     runs-on: ubuntu-latest
     env:
       Image_NAME: homepage2
