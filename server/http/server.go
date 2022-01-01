@@ -20,11 +20,10 @@ func NewServer() *Server {
 }
 
 func (s *Server) StartServer(port int) error {
-	s.server.File("/", "public/index.html")
-	s.server.Static("/static", "static")
-
 	s.server.AutoTLSManager.Cache = autocert.DirCache("/var/www/.cache")
 	s.server.Pre(middleware.HTTPSRedirect())
+	s.server.File("/", "public/index.html")
+	s.server.Static("/static", "static")
 
 	// if err := s.server.Start(fmt.Sprintf(":%d", port)); err != nil {
 	// 	return fmt.Errorf("failed to serve: %w", err)
