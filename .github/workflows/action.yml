@@ -1,5 +1,5 @@
 name: "build"
-desctiption: "build docker image"
+description: "build docker image"
 on:
   push:
     branches:
