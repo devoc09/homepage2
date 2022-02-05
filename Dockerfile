@@ -9,6 +9,7 @@ RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o webserver .
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates && mkdir /var/www/
 EXPOSE 80 443
+VOLUME /var/www/.cache
 WORKDIR /root/homepage2
 ADD . /root/homepage2
 COPY --from=builder /homepage2/webserver .
