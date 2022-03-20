@@ -22,7 +22,7 @@ func run(ctx context.Context) int {
 	errCh := make(chan error, 1)
 
 	go func() {
-		errCh <- s.StartServer(443)
+		errCh <- s.StartServer(8000)
 	}()
 
 	select {

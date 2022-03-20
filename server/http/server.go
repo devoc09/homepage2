@@ -5,8 +5,6 @@ import (
 	"fmt"
 
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"golang.org/x/crypto/acme/autocert"
 )
 
 type Server struct {
@@ -20,15 +18,16 @@ func NewServer() *Server {
 }
 
 func (s *Server) StartServer(port int) error {
-	s.server.AutoTLSManager.Cache = autocert.DirCache("/var/www/.cache")
-	s.server.Pre(middleware.HTTPSRedirect())
+	// s.server.AutoTLSManager.Cache = autocert.DirCache("/var/www/.cache")
+	// s.server.Pre(middleware.HTTPSRedirect())
 	s.server.File("/", "public/index.html")
 	s.server.Static("/static", "static")
 
 	// if err := s.server.Start(fmt.Sprintf(":%d", port)); err != nil {
 	// 	return fmt.Errorf("failed to serve: %w", err)
 	// }
-	if err := s.server.StartAutoTLS(fmt.Sprintf(":%d", port)); err != nil {
+	// if err := s.server.StartAutoTLS(fmt.Sprintf(":%d", port)); err != nil {
+	if err := s.server.Start(fmt.Sprintf(":%d", port)); err != nil {
 		return fmt.Errorf("failed to serve: %w", err)
 	}
 	return nil
